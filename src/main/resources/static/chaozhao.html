@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>数据结构--查找算法</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/typo.css">
+    <link rel="stylesheet" href="../static/lib/prism/prism.css">
+    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css">
+    <link rel="stylesheet" href="../static/css/me.css">
+    <style>
+        p{
+            text-indent: 2em !important;
+        }
+
+    </style>
+</head>
+<body>
+<!--导航-->
+<nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <!--为了适应手机端查看页面，添加stackable属性，代表可堆叠，给grid之前加上stackable-->
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui red header item">数据结构大学堂</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>线性表</a>
+            <a href="#" class="active m-item item m-mobile-hide"><i class="mini file icon"></i>查找算法</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>树</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>图</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>排序算法</a>
+            <div class="right m-item item m-mobile-hide">
+                <!-- transparent搜索框显示为透明 inverted颜色反转 -->
+                <div class="ui icon inverted white input">
+                    <input type="text" placeholder="搜索">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--点击再显示，加一个图标  menu toggle只是为了使用，另一种方法也可以用id  -->
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--中间内容-->
+
+<div  class="m-container-small m-padded-tb-big">
+    <div class="ui container">
+        <div class="ui top attached segment">
+            <!--头部-->
+            <div class="ui  horizontal link list">
+                <div class="item">
+                    <img src="https://picsum.photos/id/1015/100/100" alt="" class="ui avatar image">
+                    <div class="content"><a href="#" class="header">王煜仪</a> </div>
+                </div>
+                <div class="item">
+                    <i class="calendar icon"></i>2020-8-15
+                </div>
+                <div class="item">
+                    <i class="eye icon"></i>86
+                </div>
+            </div>
+        </div>
+
+        <div class="ui attached padded segment">
+            <!--内容部分-->
+            <div class="ui right aligned basic segment">
+                <div class="ui orange basic label">数据结构--查找算法</div>
+            </div>
+            <h1 class="ui center aligned header">查找</h1>
+            <br>
+            <div id="content" class="typo typo-selection js-toc-content  m-padded-lr-responsive m-padded-tb-large">
+                <b>查找表：一种以集合为逻辑结构，以查找为核心运算，同时包括其它运算的数据结构。</b>
+
+                <h2 id="section1">一、平均查找长度 </h2>
+                <img alt="" src="../static/images/cha1.png" style="width: 189px; height: 94px;" />
+                <h2 id="section2">二、顺序查找方法 </h2>
+                <p>用待查关键码key依次和查找表元素的关键码进行比较，若找到相等的元素，就称为查找成功，假设把整个查找表找完都没有找到给定关键码相等的元素，则查找失败。</p>
+                <p>回顾顺序表的表示</p>
+                <pre class="language-css"><code class="language-css">
+typedef struct{
+	ElementType *R;   //表的首地址
+	int length;		 //表长
+}SSTable;
+</code></pre>
+                <p>顺序表的查找</p>
+                <pre class="language-css"><code class="language-css">
+j = 1;
+n = S.length;
+while(j<=n&&k != S.R[j].key){
+	j++;
+if(j<=n&&k==S.R[j].key)
+	return(j);
+else
+	return(0);
+}
+
+</code></pre>
+                <p>加一个监视哨的查找（多一次）：</p>
+                <pre class="language-css"><code class="language-css">
+int search(SSTable S, keyType k)
+{
+	j=S.length;S.R[0].key = k;
+	while(k!=S.R[j].key)
+		j--;
+	return(j);
+}
+</code></pre>
+                <p>顺序查找的特点：</p>
+
+                <p>（1）算法简单、对查找表的结点之间没有排序要求，对表的存储结构也无任何要求（顺序和链式）</p>
+                <p>（2）N很大时查找效率低，与n成反比、平均约为n/2；</p>
+                <p>（3）改进措施：非等概率查找，可按照查找概率进行排序；</p>
+                <h2 id="section3">三、折半查找的办法 </h2>
+                <p>用待查关键字k与线性表中间位置的关键字进行比较：</p>
+                <p>(1)若相等，则查找成功。</p>
+                <p>(2)若不相等，则根据比较的结果确定下一步操作；</p>
+                <p>若k小于中间结点的关键字，则对前半个子表进行查找；<br>
+                <p>若k大于中间结点的关键字，则对后半个子表进行查找。
+                </p>
+                <p>(3)若整张表都没有找到满足条件的结点，则查找失败。</p>
+                <p>折半查找算法：</p>
+                <pre class="language-css"><code class="language-css">
+int search(SSTable S,KeyType k)
+{
+low = 1;
+high = S.length;
+while(low<=high){
+		mid = (low + high)/2;
+		if(key== S.R[mid].key){
+			return mid;
+}else if(key < S.R[mid].key){
+		high = mid-1;
+}
+else
+		low = mid +1;
+}
+}
+
+</code></pre>
+
+                <p><b>折半查找的性能分析</b></p>
+                <p>查找成功：每次将查找记录所在区间缩小一半，比顺序查找效率高，时间复杂度O(log2 n)。<br><p>适用条件：采用顺序存储结构的有序表，不适用于链式结构。</p>
+
+
+                <h2 id="section4">四、二叉排序树 </h2>
+                <p>二叉排序树或是空树，或是满足如下性质的二叉树：</p>
+                <p>（1）若其左子树非空，则左子树上所有结点的值均小于根节点的值；</p>
+                <p>（2）若其右子树非空，则右子树上所有结点的值均大于等于根节点的值；</p>
+                <p>（3）其左右子树本身又各是一颗二叉排序树。</p>
+                <p>Tips:中序遍历二叉排序树得到的是一个从小到大的有序序列。</p>
+                <p>二叉排序树表示：二叉链表</p>
+                <pre class="language-css"><code class="language-css">
+typedef struct BiTNode{
+	TElemType data;      //结点数据域;
+	struct BitNode *Ichild,*rchild;   //左右孩子指针;
+}BiTNode,*BiTree;’
+
+二叉排序树的查找算法伪代码：
+BiTree search6(BiTree bt, keytype k){
+	if(bt == NULL) return NULL;
+if(相等k==bt->data.key){
+	return (bt);
+}
+else if k较大(k->bt->data.key)
+	return (search6(bt->lch,k));
+else k较小
+	return (search6(bt->lch,k));
+}
+
+
+</code></pre>
+                <h4>4.1 二叉排序树的操作-插入</h4>
+                <p>（1）若二叉排序树为空，则插入结点应为根节点;否则，继续在其左、右子树上查找</p>
+                <p>（2）若树中已有此节点，不再插入；树中没有，查找直至某个叶子结点的左子树或右子树为空为止，则插入结点应为该叶子节点的左孩子或右孩子。</p>
+                <h4>4.2 二叉排序树的操作-生成</h4>
+                <p>将序列依次插入空的二叉排序树中，每一次插入的结点都首先要和根节点比较，大于根节点，和其右子树比较，插入；小于根节点，和其左子树比较，插入。</p>
+                <h4>4.3 二叉排序树的操作-删除</h4>
+                <p> （1）	如果删除的是叶节点：直接删除，再修改其父节点指针置为空NULL。<br><p>
+                （2）	要删除的结点只有一个孩子结点：将其父节点的指针指向要删除结点的孩子结点。<br><p>
+                （3）	如果要删除的结点有左、右两颗子树：用另一个结点替代被删除结点（左子树的最大元素或者右子树的最小元素）。
+            </p>
+                <p><b>删除算法：</b></p>
+                <pre class="language-css"><code class="language-css">
+BiTree Delete(ElementType x,BiTree bt)
+{
+	if(x < bt->data){
+		bt->lch = Delete(x,bt->lch); //递归左子树
+    }else if{
+		bt->rch = Delete(x,bt->rch); //递归右子树
+	}else{
+		if(bt->lch&&bt->rch)  //被删子树有左右子结点
+        {
+			tmp = FindMin(bt->rch);
+            bt->data = tmp->data;
+            bt->rch = Delete(bt->data,bt->rch);
+        }
+        else{
+			tmp = bt;
+            if(!bt->lch)
+				bt = bt->rch;
+            else if(!bt->rch)
+				bt = bt->lch;
+            free(tmp);
+        }
+    }
+}
+
+</code></pre>
+                <h2 id="section5">五、AVL树 </h2>
+                <p>任意结点的平衡因子只取-1，0，1的二叉排序树，叫做平衡二叉树；对于一颗含有n个结点的AVL树，其高度保持在O（log2 n）的数量级</p>
+                <h4>5.1 创建AVL</h4>
+                <p> （1）	插入新结点的时候，按照二叉排序树来进行处理；<br><p>
+                （2）	若插入的结点破坏了AVL的特性，需要调整；
+                调整AVL的方法：找到离插入节点最近且平衡因子绝对值超过1的祖先结点，以该节点为根的子树称为最小不平衡子树，可将重新平衡的范围局限于此子树。
+            </p>
+                <h4>5.2 调整AVL</h4>
+                <p>（1）RR平衡旋转</p>
+                <p>若在A的右子树的右子树上插入结点，使A的平衡因子从-1增加至2，只需进行一次逆时针选择。</p>
+                <img alt="" src="../static/images/cha2.png" style="width:383px; height: 171px;" /><br />
+                <img alt="" src="../static/images/cha3.png" style="width:381px; height: 127px;" /><br />
+                <p>（2）LL平衡旋转</p>
+                <p>若在A的左子树的左子树上插入结点，使A的平衡因子从-1增加至2，只需进行一次逆时针选择。</p>
+                <img alt="" src="../static/images/cha4.png" style="width:422px; height: 189px;" /><br />
+                <img alt="" src="../static/images/cha5.png" style="width:422px; height: 162px;" /><br />
+                <p>（3）LR平衡旋转</p>
+                <p>先将左子树左旋，再整体右旋</p>
+                <img alt="" src="../static/images/cha6.png" style="width:410px; height: 166px;" /><br />
+                <img alt="" src="../static/images/cha7.png" style="width:410px; height: 269px;" /><br />
+                <p>（4）RL平衡旋转</p>
+                <p>先将右子树左旋，再整体左旋</p>
+                <img alt="" src="../static/images/cha8.png" style="width:424px; height: 154px;" /><br />
+                <img alt="" src="../static/images/cha9.png" style="width:410px; height: 257px;" /><br />
+                <p>顺序查找、折半查找、二叉排序树查找共同特点：<br><p>
+                （1）	需要经过一系列的比较来确定关键字key的记录在表中的地址；<br><p>
+                （2）	平均查找程度都不为0；<br><p>
+                （3）	不同查找方法尽在关键字和给定值进行比较的顺序不同
+            </p>
+                <h2 id="section6">六、哈希表 </h2>
+                <p>哈希表定义：哈希表是一种根据关键码去寻找值的数据映射结构，该结构通过把关键码映射的位置去寻找存放值的地方。我们使用一个下标范围比较大的数组来存储元素。可以设计一个函数（哈希函数，也叫做散列函数），使得每个元素的关键字都与一个函数值（即数组下标）相对应，于是用这个数组单元来存储这个元素；也可以简单的理解为，按照关键字为每一个元素"分类"，然后将这个元素存储在相应"类"所对应的地方。但是，不能够保证每个元素的关键字与函数值是一一对应的，因此极有可能出现对于不同的元素，却计算出了相同的函数值，这样就产生了"冲突"，换句话说，就是把不同的元素分在了相同的"类"之中。</p>
+                <h4>6.1哈希冲突</h4>
+                <p>在这里举一个查字典的例子：如果想要获取“按”字详细信息，根据拼音去查an在字典的位置，查了一下得到“安“，过程就是键码映射，但是问题来了，我们要查的是“按”，而不是“安，但是他们的拼音都是一样的。也就是通过关键字”按“和关键字”安“可以映射到一样的字典页码4的位置，这就是哈希冲突（也叫哈希碰撞）。</p>
+                <b>哈希冲突解决方法：</b>
+                <h5>6.1.1	开发定址法</h5>
+                <p>开发地址法的做法是，当冲突发生时，使用某种探测算法在散列表中寻找下一个空的散列地址，只要散列表足够大，空的散列地址总能找到。按照探测序列的方法，一般将开放地址法区分为线性探查法、二次探查法、双重散列法等。
+                    <br><p>我们用以一个模8的哈希表为例，采用除留余数法，往表中插入三个关键字分别为26，35，36的记录，分别除8取模后，在表中的位置如下：
+            </p>
+                <img alt="" src="../static/images/cha10.png" style="width:554px; height: 89px;" /><br />
+                <p>这个时候插入元素42，那么正常应该在地址为2的位置里，但因为关键字30已经占据了位置，所以就需要解决这个地址冲突的情况，接下来就介绍三种探测方法的原理，并展示效果图。</p>
+                <p>（1）线性探查法<br>
+                <p>fi=(f(key)+i) ％ m ，0 ≤ i ≤ m-1</p>
+                <p>探查时从地址 d 开始，首先探查 T[d]，然后依次探查 T[d+1]，…，直到 T[m-1]，此后又循环到 T[0]，T[1]，…，直到探查到有空余的地址或者到 T[d-1]为止。</p>
+                <p>插入42时，探查到地址2的位置已经被占据，接着下一个地址3，地址4，直到空位置的地址5，所以39应放入地址为5的位置。</p>
+                <p>缺点：需要不断处理冲突，无论是存入还是査找效率都会大大降低。</p>
+                <img alt="" src="../static/images/cha11.png" style="width:554px; height: 80px;" /><br />
+                <p>下面为算法程序</p>
+                <pre class="language-css"><code class="language-css">
+    int FindHash(SeqList* pL, KeyType K)
+{
+    int c=0;  int p=Hash(K); /*求得哈希地址*/
+    while(pL->data[p].key!=NULL_KEY && K!=pL->data[p].key && ++c<MAXNUM)    p=Hash(K+c);
+    if(K==pL->data[p].key) {
+        printf("\n成功找到 %d", K);
+        return p; /*查找成功,p返回待查数据元素下标*/
+    }
+    else if(pL->data[p].key==NULL_KEY) {
+       printf("\n无法找到 %d , 在位置 %d 插入。", K,p);
+       pL->data[p].key = K;   pL->n++;
+       return p;
+    } else {
+       printf("\n无法找到 %d , 表已满。", K);
+       return -1;
+    }
+  }
+</code></pre>
+                <p>（2）二次探查法<br>
+                <p>fi=(f(key)+di) ％ m，0 ≤ i ≤ m-1</p>
+                <p>探查时从地址 d 开始，首先探查 T[d]，然后依次探查 T[d+di]，di 为增量序列12，-12，22，-22，……，q2，-q2 且q≤1/2 (m-1) ,直到探查到 有空余地址或者到 T[d-1]为止。</p>
+                <p>所以插入42时，探查到地址2被占据，就会探查T[2+1^2]也就是地址3的位置，被占据后接着探查到地址7，然后插入。</p>
+                <img alt="" src="../static/images/cha12.png" style="width:554px; height: 80px;" /><br />
+                <p>缺点：无法探查到整个散列空间。</p>
+                <p>（3）双哈希函数探测法<br>
+                <p>fi=(f(key)+i*g(key)) % m (i=1，2，……，m-1)</p>
+                <p>双哈希函数探测法，先用第一个函数 f(key) 对关键码计算哈希地址，一旦产生地址冲突，再用第二个函数 g(key) 确定移动的步长因子，最后通过步长因子序列由探测函数寻找空的哈希地址。</p>
+                <h5>6.1.2	链地址法（拉链法）</h5>
+                <p>链地址法的原理时如果遇到冲突，他就会在原地址新建一个空间，然后以链表结点的形式插入到该空间。
+                    <br><p> 例如有一堆数据{1,12,26,337,353...}，哈希算法是H(key)=key mod 16，第一个数据1的哈希值f(1)=1，插入到1结点的后面，第二个数据12的哈希值f(12)=12，插入到12结点，第三个数据26的哈希值f(26)=10，插入到10结点后面，第4个数据337，计算得到哈希值是1，遇到冲突，但是依然只需要找到该1结点的最后链结点插入即可，同理353。
+            </p>
+                <img alt="" src="../static/images/cha13.png" style="width:533px; height: 445px;" /><br />
+
+
+                <div class="ui attached positive message ">
+                    <!--博客信息说明-->
+                    <div class="ui middle aligned grid">
+                        <div class="eleven wide column">
+                            <ui class=" list">
+                                <li>作者：王煜仪</li>
+                                <li>发表时间：2020-08-15</li>
+                                <li>版权声明：自由转载-非商用</li>
+                                <li>邮箱联系：876047356@qq.com</li>
+                            </ui>
+                        </div>
+                        <div class="five wide column">
+                            <img src="../static/images/2.png" alt="" class="ui right floated rounded bordered image" style="width: 130px">
+                        </div>
+                    </div>
+                </div>
+                <div id="comment-container" class="ui bottom attached segment">
+                    <!--留言区域列表-->
+                    <div class="ui teal segment">
+                        <div class="ui comments">
+                            <h3 class="ui dividing header"><trans oldtip="Comments" newtip="评论">Comments</trans></h3>
+                            <div class="comment">
+                                <a class="avatar">
+                                    <img src="https://picsum.photos/id/1008/200/200">
+                                </a>
+                                <div class="content">
+                                    <a class="author"><trans oldtip="zhangsan" newtip="张三">张三</trans></a>
+                                    <div class="metadata">
+                                        <span class="date"><trans oldtip="Today at 2：38PM" newtip="今天下午2：38">Today at 2：38PM</trans></span>
+                                    </div>
+                                    <div class="text"><trans oldtip=" good article！ " newtip="顶！"> good </trans></div>
+                                    <div class="actions">
+                                        <a class="reply">回复</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="ui form">
+                            <div class="filed">
+                                <textarea name="content" placeholder="请输入评论信息..."></textarea>
+                            </div>
+                            <div class="fields">
+                                <div class="field m-mobile-wide m-margin-bottom-small">
+                                    <div class="ui left icon input">
+                                        <i class="user icon"></i>
+                                        <input type="text" name="nickname" placeholder="姓名">
+                                    </div>
+                                </div>
+                                <div class="field m-mobile-wide m-margin-bottom-small">
+                                    <div class="ui left icon input">
+                                        <i class="mail icon"></i>
+                                        <input type="text" name="email" placeholder="邮箱">
+                                    </div>
+                                </div>
+                                <div class="field m-mobile-wide m-margin-bottom-small">
+                                    <button class="ui blue button m-mobile-wide m-margin-bottom-small"><i class="edit icon"></i> 发布</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div   class="m-padded m-fixed m-right-bottom "  >
+                <div class="ui vertical icon buttons ">
+                    <button type="button" class="ui toc blue button">目录</button>
+                    <a href="#comment-container" class="ui blue button">留言</a>
+                    <button type="button" class="ui wechat icon button"><i class="weixin icon"></i> </button>
+
+
+                    <a href="#" class="ui icon button"><i class="chevron up icon"></i></a>
+                    <!--直接返回顶部修改为平滑滚动到顶部-->
+                    <!--<div id="toTop-button" class="ui icon button"><i class="chevron up icon"></i> </div>-->
+                </div>
+                <!--生成二维码  将已经写死的二维码注释掉，既可以随机生成二维码-->
+                <div id="qrcode" class="ui wechat-qr flowing popup transition hidden " style="width: 130px !important;">
+                    <!--
+                      <div id="qrcode" class="ui wechat-qr flowing popup transition hidden m-padded-mini" style="width: 130px !important;">
+                      <img src="images/wechat.jpg" alt="" class="ui rounded image "  style="width:120px !important;">
+                    -->
+                </div>
+            </div>
+            <!--生成目录-->
+            <div class="ui toc-container flowing popup  transition hidden" style="width:250px !important;">
+                <ol class="js-toc">
+
+                </ol>
+            </div>
+
+
+
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+            <!--<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>-->
+
+            <script src="..//static/lib/prism/prism.js"></script>
+            <script src="..//static/lib/tocbot/tocbot.min.js"></script>
+            <script src="..//static/lib/qrcode/qrcode.min.js"></script>
+
+            <script>
+
+
+                //item使用其来引用到m-mobile-hidden  用以判断显示display
+                $('.menu.toggle').click(function () {
+                    $('.m-item').toggleClass('m-mobile-hide');
+                });
+                //通过CSS定位到相应区域
+                $('#payButton').popup({
+                    popup: $('.payQR.popup'),
+                    on:'click',
+                    position:'bottom center',
+                });
+                //初始化
+                tocbot.init({
+                    // Where to render the table of contents.显示目录的区域
+                    tocSelector: '.js-toc',
+                    // Where to grab the headings to build the table of contents.生成目录的源，内容
+                    contentSelector: '.js-toc-content',
+                    // Which headings to grab inside of the contentSelector element. 生成目录的级别
+                    headingSelector: 'h1, h2, h3',
+                });
+                //鼠标移入微信图标后出现二维码
+                $('.wechat').popup({
+                    popup: $('.wechat-qr.popup'),
+                    position:'left center',
+                });
+                $('.toc.button').popup({
+                    popup: $('.toc-container.popup'),
+                    on:'click',
+                    position:'left center',
+                });
+                //生成二维码的js代码  test 为二维码承载元素的id
+                var qrcode = new QRCode("qrcode", {
+                    text: "http://jindo.dev.naver.com/collie",
+                    width: 110,
+                    height: 110,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+                //平滑滚动插件  失败
+                /*$('#toTop-button').click(function(){
+                      $(window).scrollTo(0,500);
+                });*/
+
+            </script>
+</body>
+</html>

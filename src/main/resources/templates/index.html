@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>首页展示</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css">
+</head>
+<body>
+<!--导航-->
+<nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <!--为了适应手机端查看页面，添加stackable属性，代表可堆叠，给grid之前加上stackable-->
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui red header item">数据结构大学堂</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>线性表</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>查找算法</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>树</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>图</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>排序算法</a>
+            <div class="right m-item item m-mobile-hide">
+                <!-- transparent搜索框显示为透明 inverted颜色反转 -->
+                <div class="ui icon inverted white input">
+                    <input type="text" placeholder="搜索">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--点击再显示，加一个图标  menu toggle只是为了使用，另一种方法也可以用id  -->
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+<!--中间内容-->
+
+<div class="m-container m-padded-tb-big">
+    <div class="ui container">
+        <div class="ui stackable grid">
+            <!--左边博客列表-->
+            <div class="sixteen wide column">
+                <!--头部header-->
+                <div class="ui top attached segment">
+                    <div class="ui middle aligned two column grid">
+                        <div class="column">
+                            <h3 class="ui red header">数据结构首页</h3>
+                        </div>
+                        <div class="right aligned column">
+                            共<h2 class="ui blue header m-inline-block m-text-thin">5</h2>篇
+                        </div>
+                    </div>
+                </div>
+                <!--中间内容 content-->
+                <div class="ui attached segment">
+
+                    <div class="ui padded vertical segment m-padded-tb-big">
+                        <div class="ui mobile reversed stackable grid">
+                            <div class="sixteen wide column">
+                                <h3 class="ui header">数据结构--线性表</h3>
+                                <p class="m-text">线性表是最基本、最简单、也是最常用的一种数据结构。线性表（linear list）是数据结构的一种，一个线性表是n个具有相同特性的数据元素的有限序列......</p>
+                                <div class="ui grid">
+                                    <div class="sixteen wide column">
+                                        <div class="ui mini horizontal link list">
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1015/800/450" alt="" class="ui avatar image">
+                                                <div class="content"><a href="#" class="header">王煜仪</a> </div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i>2020-08-15
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon"></i>97
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right aligned fourteen wide column">
+                                        <a href="linear.html" target="_blank" class="ui red basic label m-padded-tiny m-text-thin">查看详情</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="ui padded vertical segment m-padded-tb-big">
+                        <div class="ui mobile reversed stackable grid">
+                            <div class="sixteen wide column">
+                                <h3 class="ui header">数据结构--查找算法</h3>
+                                <p class="m-text">查找是在大量的信息中寻找一个特定的信息元素，在计算机应用中，查找是常用的基本运算，例如编译程序中符号表的查找。本文介绍了查找算法的六种常见方法
+                                    ......</p>
+                                <div class="ui grid">
+                                    <div class="sixteen wide column">
+                                        <div class="ui mini horizontal link list">
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1015/800/450" alt="" class="ui avatar image">
+                                                <div class="content"><a href="#" class="header">王煜仪</a> </div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i>2020-08-15
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon"></i>92
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right aligned fourteen wide column">
+                                        <a href="chaozhao.html" target="_blank" class="ui red basic label m-padded-tiny m-text-thin">查看详情</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="ui padded vertical segment m-padded-tb-big">
+                        <div class="ui mobile reversed stackable grid">
+                            <div class="sixteen wide column">
+                                <h3 class="ui header">数据结构--树笔记</h3>
+                                <p class="m-text">在数据结构中，树是一种逻辑结构。**树：**是n(n≥0)个结点的有限集合,n=0时,称为空树。
+                                    而任意非空树应满足: 1)有且仅有一个特定的称为根的结点; 2)当n>1时,其余结点可分为m(m>0个互不相交的
+                                    有限集合,其中每一个集合本身又是一棵树,称为根结点的子树。
+                                    </br>
+                                    其特点： 除根结点外每一个结点都有一个一个前驱结点。每一个结点都有零个或多个后继结点。n个结点的树
+                                    只有n-1条边。......</p>
+                                <div class="ui grid">
+                                    <div class="sixteen wide column">
+                                        <div class="ui mini horizontal link list">
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1015/800/450" alt="" class="ui avatar image">
+                                                <div class="content"><a href="#" class="header">王煜仪</a> </div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i>2020-08-15
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon"></i>100
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right aligned fourteen wide column">
+                                        <a href="tree.html" target="_blank" class="ui red basic label m-padded-tiny m-text-thin">查看详情</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="ui padded vertical segment m-padded-tb-big">
+                        <div class="ui mobile reversed stackable grid">
+                            <div class="sixteen wide column">
+                                <h3 class="ui header">数据结构--图</h3>
+                                <p class="m-text">图（Graph）是由顶点的有穷非空集合和顶点之间边的集合组成，通常表示为：G(V,E)，其中，
+                                    G表示一个图，V是图G中顶点的集合，E是图G中边的集合。
+                                    </br>
+                                    　　                             在图中需要注意的是：
+                                    </br>
+                                    　　                             （1）线性表中我们把数据元素叫元素，树中将数据元素叫结点，在图中数据元素，我们则称之为顶点（Vertex）。
+                                    　　                             （2）线性表可以没有元素，称为空表；树中可以没有节点，称为空树；但是，在图中不允许没有顶点（有穷非空性）。
+                                    　　                             （3）线性表中的各元素是线性关系，树中的各元素是层次关系，而图中各顶点的关系是用边来表示（边集可以为空）。</p>
+                                <div class="ui grid">
+                                    <div class="sixteen wide column">
+                                        <div class="ui mini horizontal link list">
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1015/100/100" alt="" class="ui avatar image">
+                                                <div class="content"><a href="#" class="header">王煜仪</a> </div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i>2020-08-15
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon"></i>96
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right aligned fourteen wide column">
+                                        <a href="graph.html" target="_blank" class="ui red basic label m-padded-tiny m-text-thin">查看详情</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="ui padded vertical segment m-padded-tb-big">
+                        <div class="ui mobile reversed stackable grid">
+                            <div class="sixteen wide column">
+                                <h3 class="ui header">数据结构--排序算法</h3>
+                                <p class="m-text">算法（Algorithm）是指解题方案的准确而完整的描述，是一系列解决问题的清晰指令，算法代表着用
+                                    系统的方法描述解决问题的策略机制。也就是说，能够对一定规范的输入，在有限时间内获得所要求的输出。如果一个算法有
+                                    缺陷，或不适合于某个问题，执行这个算法将不会解决这个问题。不同的算法可能用不同的时间、空间或效率来完成同样的任务。一个算法的优劣可以用空间复杂度与时间复杂度来衡量。
+                                    ......</p>
+                                <div class="ui grid">
+                                    <div class="sixteen wide column">
+                                        <div class="ui mini horizontal link list">
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1015/100/100" alt="" class="ui avatar image">
+                                                <div class="content"><a href="#" class="header">王煜仪</a> </div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i>2020-08-15
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon"></i>83
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right aligned fourteen wide column">
+                                        <a href="paixu.html" target="_blank" class="ui red basic label m-padded-tiny m-text-thin">查看详情</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!--尾部内容-->
+                <div class="ui bottom attached segment">
+                    <div class="ui middle aligned two column  grid">
+                        <div class="column">
+                            <a href="#" class="ui mini red basic button">上一页</a>
+                        </div>
+                        <div class="right aligned column">
+                            <a href="#" class="ui mini red basic button">下一页</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

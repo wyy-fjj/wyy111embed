@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>数据结构--排序</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/typo.css">
+    <link rel="stylesheet" href="../static/lib/prism/prism.css">
+    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css">
+    <link rel="stylesheet" href="../static/css/me.css">
+    <style>
+        p{
+            text-indent: 2em !important;
+        }
+    </style>
+</head>
+<body>
+<!--导航-->
+<nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <!--为了适应手机端查看页面，添加stackable属性，代表可堆叠，给grid之前加上stackable-->
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui red header item">数据结构大学堂</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>线性表</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>查找算法</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>树</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>图</a>
+            <a href="#" class="active m-item item m-mobile-hide"><i class="mini file icon"></i>排序算法</a>
+            <div class="right m-item item m-mobile-hide">
+                <!-- transparent搜索框显示为透明 inverted颜色反转 -->
+                <div class="ui icon inverted white input">
+                    <input type="text" placeholder="搜索">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--点击再显示，加一个图标  menu toggle只是为了使用，另一种方法也可以用id  -->
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--中间内容-->
+
+<div  class="m-container-small m-padded-tb-big">
+    <div class="ui container">
+        <div class="ui top attached segment">
+            <!--头部-->
+            <div class="ui  horizontal link list">
+                <div class="item">
+                    <img src="https://picsum.photos/id/1015/100/100" alt="" class="ui avatar image">
+                    <div class="content"><a href="#" class="header">王煜仪wyy</a> </div>
+                </div>
+                <div class="item">
+                    <i class="calendar icon"></i>2020-08-15
+                </div>
+                <div class="item">
+                    <i class="eye icon"></i>93
+                </div>
+            </div>
+        </div>
+
+        <div class="ui attached padded segment">
+            <!--内容部分-->
+            <div class="ui right aligned basic segment">
+                <div class="ui orange basic label">排序算法知识点总结笔记</div>
+            </div>
+            <h1 class="ui center aligned header">排序</h1>
+            <br>
+            <div id="content" class="typo typo-selection js-toc-content  m-padded-lr-responsive m-padded-tb-large">
+                <h2 id="section1">一、排序基本概念 </h2>
+                <p><b>排序</b>是指计算机内经常进行的一种操作，其目的是将一组“无序”的记录序列调整为“有序”的记录序列。</p>
+                <h4>1.排序的特点概要</h4>
+                <p>1）<b>排序算法的稳定性：</b>键值相等的记录排序后保持原来的顺序，则稳定，否则不稳定。</p>
+                <p>2）<b>排序的分类：</b>可按待排序文件规模大小分类为：内部排序—在内部进行的排序、外部排序—在外存设备上进行排序。</p>
+                <p>3）<b>排序方法分类：</b>插入类（包括直接插入排序等）、交换类（包括冒泡排序等）、选择类（包括简单选择排序等）、归并类（包括归并排序）、其它方法（包括基数排序）。</p>
+                <p>4）<b>待排序记录的存储方式：</b> 在排序的过程中通常进行下列两种操作<br><p>(1)比较两个关键字大小<br><p>(2)将记录从一个位置移动到另一个位置。</p>
+                <p>5）<b>待排序的记录有如下三种方式：</b><br><p>(1)待排序的一组记录存放在地址连续的一组存储单元上。<br><p>(2)一组待排序的记录存放在静态链表上，记录之间的次序管旭由指针实现。<br><p>(3)待排序记录本身存储在一组连续地址的存储单元内，同时有另一个指示各个记录存储位置的地址向量。</p>
+                <p>6）<b>排序算法效率的指标：</b><br><p>(1)算法执行时所需要的时间（最重要）<br><p>(2)执行算法所需要的附加空间。</p>
+                <h4>2.直接插入排序</h4>
+                <h5>基本思想</h5>
+                <p>将一个记录插入到已排好序的序列中，从而得到一个新的有序序列（将序列的第一个数据看成是一个有序的子序列，然后从第二个记录逐个向该有序的子序列进行有序的插入，直至整个序列有序）。</p>
+                <h5>下面举一个例子</h5>
+                <img alt="" src="../static/images/paixu1.png" style="width:420px; height: 186px;" /><br />
+                <p>重点：使用哨兵，用于临时存储和判断数组边界。</p>
+                <p>算法：用a[0]作为哨兵</p>
+                <pre class="language-css"><code class="language-css">
+void sort(ElementType a[],int n)
+{
+	for(i=2;i<=n;i++){
+		a[0] =  a[i];
+		j = i-1;
+        while(a[j]>a[0]){
+			a[j+1] = a[j];
+            j--;
+        }
+		a[j+1]=a[0];
+    }
+}
+</code></pre>
+                <h4>3.冒泡排序</h4>
+                <h5>基本思想</h5>
+                <p>每次都是相邻的两个数进行比较，将较大者交换到后一个位置，对n个数的序列进行n-1次比较后最大者被交换到了最后一个位置，这样就完成了一趟冒泡排序。</p>
+                <p>下面为算法程序</p>
+                <pre class="language-css"><code class="language-css">
+vovoid Bubble_sort(ElementType a[],int n)
+{
+	for(i=1;i<=n;i++){
+		flag = 0;
+		for(j=1;j<n-i;j++){
+			if(a[j]>a[j+1]){
+				a[j] = a[j+1];
+                flag = 1;
+            }
+        }
+        if(flag == 0){
+			break;
+        }
+    }
+}
+</code></pre>
+                <h4>4.快速排序</h4>
+                <h5>基本思想</h5>
+                <p>先从待排序序列中找一个元素作为中心点或者说界点，比如说选第一个元素。设这个中心点为y,序列中的其他元素与y进行比较，大于等于y的放在右边，小于y的放在左边。然后再对两个子序列递归的快速排序，直到每个序列只剩下一个元素。</p>
+                <h5>下面举一个例子</h5>
+                <p>假设最开始的基准数据为数组第一个元素23,则首先用一个临时变量去存储基准数据,即tmp=23;然后分别从数组的两端扫描数组，设两个指示标志:low指向起始位置，high指向末尾.</p>
+                <img alt="" src="../static/images/paixu2.png" style="width:420px; height: 186px;" /><br />
+                <p>首先从后半部分开始，如果扫描到的值大于基准数据就让high减1,如果发现有元素比该基准数据的值小(如上图中18<=tmp)，就将high位置的值赋值给low位置 ,结果如下:</p>
+                <img alt="" src="../static/images/paixu3.png" style="width:420px; height: 186px;" /><br />
+                <p>然后开始从前往后扫描,如果扫描到的值小于基准数据就让low加1,如果发现有元素大于基准数据的值(如上图46=>tmp)，就再将low位置的值赋值给high位置的值,指针移动并且数据交换后的结果如下:</p>
+                <img alt="" src="../static/images/paixu4.png" style="width:420px; height: 186px;" /><br />
+                <p>然后再开始从后向前扫描,原理同上,发现上图11<=tmp,则将high位置的值赋值给low位置的值,结果如下:</p>
+                <img alt="" src="../static/images/paixu5.png" style="width:420px; height: 186px;" /><br />
+                <p>然后再开始从前往后遍历,直到low=high结束循环,此时low或high的下标就是基准数据23在该数组中的正确索引位置.如下图所示：</p>
+                <img alt="" src="../static/images/paixu6.png" style="width:420px; height: 186px;" /><br />
+                <pre class="language-css"><code class="language-css">
+int partition(ElementType a[],int low,int high)
+{
+	a[0] = a[low];
+    tmp= a[low];
+    while(low < high){
+		while(low< high && a[high]>a[0]){
+			--high;
+        }
+        a[low] = a[high];
+        while(low< high && a[low] < a[0]){
+			++low;
+        }
+        a[high] = a[low];
+        a[low] = a[0];
+    }
+    return low;
+}
+</code></pre>
+                <p>空间复杂度：由于排序时递归的，执行时需要栈存放每层递归调用时参数，最好情况下空间复杂度为O（log2 n），最坏情况为O(n)。</p>
+                <p>特点：由于中心点可选任意元素，算法不稳定。适合初选记录无序，n较大的情况。</p>
+
+                <h4>5.简答选择排序算法</h4>
+                <h5>基本思想</h5>
+                <p>首先，从待排序列中选出最小者并交换到第一个位置；接下来，从剩下的未排序序列中选择最小者并交换到第二个位置；以此类推，对于含n个元素的序列进行n-1次选择之后就排好序了。</p>
+                <h5>下面举一个例子</h5>
+                <img alt="" src="../static/images/paixu7.png" style="width:420px; height: 480px;" /><br />
+                <p>下面为算法程序</p>
+                <pre class="language-css"><code class="language-css">
+void sort(ElementType a[],int n)
+{
+	for(i=1;i<=n-1;i++){
+		for(j=i+1;j<=n;j++){
+			if(a[i]>a[j]){
+				tmp = a[j];
+                a[j] = a[i];
+                a[i] = tmp;
+            }
+        }
+    }
+}
+
+</code></pre>
+
+                <h4>6.堆排序</h4>
+                <p>堆是具有以下性质的完全二叉树：每个结点的值都大于或等于其左右孩子结点的值，称为大顶堆；或者每个结点的值都小于或等于其左右孩子结点的值，称为小顶堆。</p>
+
+                <h5>基本思想</h5>
+                <p>将无序序列建成一个堆；将剩余的n-1个元素再调整成一个堆；输出堆顶元素，以最后一个元素代替堆顶元素，重复执行，直至整个堆剩一个元素。</p>
+                <h5>下面举一个大顶堆例子</h5>
+                <p>将无序数组构造成一个大根堆（升序用大根堆，降序就用小根堆）,假设存在以下数组</p>
+
+                <img alt="" src="../static/images/paixu8.png" style="width:420px; height: 135px;" /><br />
+                <p>主要思路：第一次保证0~0位置大根堆结构（废话），第二次保证0~1位置大根堆结构，第三次保证0~2位置大根堆结构...直到保证0~n-1位置大根堆结构（每次新插入的数据都与其父结点进行比较，如果插入的数比父结点大，则与父结点交换，否则一直向上交换，到小于等于父结点，或者来到了顶端）。</p>
+                <p><b>（1）插入6</b></p>
+                <img alt="" src="../static/images/paixu9.png" style="width:420px; height: 160px;" /><br />
+                <p><b>（2）插入8</b></p>
+                <img alt="" src="../static/images/paixu10.png" style="width:420px; height: 160px;" /><br />
+                <p><b>（3）插入5</b></p>
+                <img alt="" src="../static/images/paixu11.png" style="width:420px; height: 160px;" /><br />
+                <p><b>（4）插入7</b></p>
+                <img alt="" src="../static/images/paixu12.png" style="width:420px; height: 160px;" /><br />
+                <p>此时就得了一个大顶堆；下面将顶端的数与最后一位数交换，然后将剩余的数再构造成一个大根堆，进行迭代；</p>
+                <img alt="" src="../static/images/paixu13.png" style="width:420px; height: 160px;" /><br />
+                <p>此时最大数8已经来到末尾，则固定不动，后面只需要对顶端的数据进行操作即可，拿顶端的数与其左右孩子较大的数进行比较，如果顶端的数大于其左右孩子较大的数，则停止，如果顶端的数小于其左右孩子较大的数，则交换，然后继续与下面的孩子进行比较。</p>
+                <img alt="" src="../static/images/paixu14.png" style="width:420px; height: 160px;" /><br />
+                <p>剩余的数开始构造大根堆 ，然后顶端数与末尾数交换，固定最大值再构造大根堆，重复执行上面的操作，最终会得到有序数组。</p>
+                <img alt="" src="../static/images/paixu15.png" style="width:420px; height: 180px;" /><br />
+                <b>时间复杂度：O(nlog 2n) 空间复杂度：O(1)</b>
+
+                <h4>7.归并排序法</h4>
+                <b>将两个或两个以上的有序表组合成一个新有序表</b>
+                <h5>基本思想</h5>
+                <p>初始化无序序列看成n个有序子序列，每个子序列长度为1;两两合并，得到n/2个长度为2或1的有序子序列;重复步骤2直至得到一个长度为n的有序序列为止</p>
+                <h5>下面举一个2-路归并排序过程</h5>
+                <p>以数组A[8] = {6, 3, 2, 7, 1, 5, 4, 8}为例，归并排序自顶向下的排序过程如下图所示：</p>
+
+                <img alt="" src="../static/images/paixu16.png" style="width:420px; height: 480px;" /><br />
+
+                <h4>8.基数排序</h4>
+                <h5>基本思想</h5>
+                <p>待排序序列中，每个元素有d个数值组成，每个数值的可能取rd个值，从最低为开始，根据每个数值的不同将待排序列中的元素分配到rd个队列中，然后再收集，重复d次，完成排列。</p>
+                <h5>下面举一个例子</h5>
+                <p>通过基数排序对数组{53, 3, 542, 748, 14, 214, 154, 63, 616}，它的示意图如下：</p>
+
+                <img alt="" src="../static/images/paixu17.png" style="width:420px; height: 480px;" /><br />
+
+
+
+
+
+
+
+
+
+                <h2 id="section3">三、查找算法</h2>
+                <h4>1.顺序查找方法</h4>
+                <p>顺序查找方法（Selection sort）最基本的查找技术，过程：从表中的第一个（或最后一个）记录开始，逐个进行记录的 关键字和给定值比较，
+                    若某个记录的关键字和给定值相等，则查找成功，找到所查的记录； 如果直到最后一个（或第一个）记录，其关键字和给定值比较都不等时，
+                    则表示没有查到记录，查找不成功。</p>
+                <p>顺序查找算法：</p>
+                <pre class="language-css"><code class="language-css">
+#从 a 列表中查找值 v,如果找到则返回第一次出现的下标，否则返回-1
+def sequenceSearch(a,v):
+    for i in range(len(a)):
+      if a[i] == v:
+      return i
+      return -1
+ if __name__ == '__main__':
+      a=[11,22,33,44,55,11]
+      v=22
+      index=sequenceSearch(a,v)
+      print('查找到的索引为：',index)</code></pre>
+                <h4>2.二分查找方法</h4>
+                <p>二分查找又称折半查找，优点是比较次数少，查找速度快，平均性能好；其缺点是要求 待查表为有序表，且插入删除困难。因此，折半查找方
+                    法适用于不经常变动而查找频繁的有 序列表。首先，假设表中元素是按升序排列，将表中间位置记录的关键字与查找关键字比较， 如果两者
+                    相等，则查找成功；否则利用中间位置记录将表分成前、后 fp 两个子表，如果中 间位置记录的关键字大于查找关键字，则进一步查找前一
+                    子表，否则进一步查找后一子表。 重复以上过程，直到找到满足条件的记录，使查找成功，或直到子表不存在为止，此时查找 不成功。</p>
+                <p>二分法查找法（非递归实现）</p>
+                <pre class="language-css"><code class="language-css">
+def binary_search(alist, item):
+      first = 0
+      last = len(alist) - 1
+      while first <= last:
+         midpoint = (first + last) // 2
+         if alist[midpoint] == item:
+            return True
+         elif item < alist[midpoint]:
+            last = midpoint - 1
+         else:
+            first = midpoint + 1
+      return False
+testlist = [0, 1, 2, 8, 13, 17, 19, 32, 42 ]
+print(binary_search(testlist, 12))
+print(binary_search(testlist, 13))</code></pre>
+                <p>二分法查找法（递归实现）</p>
+                <pre class="language-css"><code class="language-css">
+def binary_search(alist, item):
+      if len(alist) == 0:
+         return False
+      else:
+        midpoint = len(alist)//2
+      if alist[midpoint]==item:
+         return True
+      else:
+        if alist[midpoint]>item:
+            return  binary_search(alist[:midpoint],item)
+      else:
+            return binary_search(alist[midpoint+1:],item)
+testlist = [0, 1, 2, 8, 13, 17, 19, 32, 42,]
+print(binary_search(testlist, 3))
+print(binary_search(testlist, 13))</code></pre>
+            </div>
+            <!--定义标签-->
+            <!--          <div class="m-padded-lr-responsive m-padded-tb-large">-->
+            <!--              <div class="ui basic teal left pointing label">古文阅读</div>-->
+            <!--          </div>-->
+
+
+        </div>
+        <div class="ui attached positive message ">
+            <!--博客信息说明-->
+            <div class="ui middle aligned grid">
+                <div class="eleven wide column">
+                    <ui class=" list">
+                        <li>作者：王煜仪</li>
+                        <li>发表时间：2020-08-15</li>
+                        <li>版权声明：自由转载-非商用</li>
+                        <li>邮箱联系：876047356@qq.com</li>
+                    </ui>
+                </div>
+                <div class="five wide column">
+                    <img src="../static/images/2.png" alt="" class="ui right floated rounded bordered image" style="width: 130px">
+                </div>
+            </div>
+        </div>
+        <div id="comment-container" class="ui bottom attached segment">
+            <!--留言区域列表-->
+            <div class="ui teal segment">
+                <div class="ui comments">
+                    <h3 class="ui dividing header"><trans oldtip="Comments" newtip="评论">Comments</trans></h3>
+                    <div class="comment">
+                        <a class="avatar">
+                            <img src="https://picsum.photos/id/1008/200/200">
+                        </a>
+                        <div class="content">
+                            <a class="author"><trans oldtip="zhaoliu" newtip="赵六">赵六</trans></a>
+                            <div class="metadata">
+                                <span class="date"><trans oldtip="Today at 2：38PM" newtip="今天下午2：38">Today at 2：38PM</trans></span>
+                            </div>
+                            <div class="text"><trans oldtip=" good article！ " newtip="顶！"> wo! </trans></div>
+                            <div class="actions">
+                                <a class="reply">回复</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="ui form">
+                    <div class="filed">
+                        <textarea name="content" placeholder="请输入评论信息..."></textarea>
+                    </div>
+                    <div class="fields">
+                        <div class="field m-mobile-wide m-margin-bottom-small">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="nickname" placeholder="姓名">
+                            </div>
+                        </div>
+                        <div class="field m-mobile-wide m-margin-bottom-small">
+                            <div class="ui left icon input">
+                                <i class="mail icon"></i>
+                                <input type="text" name="email" placeholder="邮箱">
+                            </div>
+                        </div>
+                        <div class="field m-mobile-wide m-margin-bottom-small">
+                            <button class="ui blue button m-mobile-wide m-margin-bottom-small"><i class="edit icon"></i> 发布</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div   class="m-padded m-fixed m-right-bottom "  >
+        <div class="ui vertical icon buttons ">
+            <button type="button" class="ui toc blue button">目录</button>
+            <a href="#comment-container" class="ui blue button">留言</a>
+            <button type="button" class="ui wechat icon button"><i class="weixin icon"></i> </button>
+
+
+            <a href="#" class="ui icon button"><i class="chevron up icon"></i></a>
+            <!--直接返回顶部修改为平滑滚动到顶部-->
+            <!--<div id="toTop-button" class="ui icon button"><i class="chevron up icon"></i> </div>-->
+        </div>
+        <!--生成二维码  将已经写死的二维码注释掉，既可以随机生成二维码-->
+        <div id="qrcode" class="ui wechat-qr flowing popup transition hidden " style="width: 130px !important;">
+            <!--
+              <div id="qrcode" class="ui wechat-qr flowing popup transition hidden m-padded-mini" style="width: 130px !important;">
+              <img src="images/wechat.jpg" alt="" class="ui rounded image "  style="width:120px !important;">
+            -->
+        </div>
+    </div>
+    <!--生成目录-->
+    <div class="ui toc-container flowing popup  transition hidden" style="width:250px !important;">
+        <ol class="js-toc">
+
+        </ol>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <!--<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>-->
+
+    <script src="..//static/lib/prism/prism.js"></script>
+    <script src="..//static/lib/tocbot/tocbot.min.js"></script>
+    <script src="..//static/lib/qrcode/qrcode.min.js"></script>
+
+    <script>
+
+
+        //item使用其来引用到m-mobile-hidden  用以判断显示display
+        $('.menu.toggle').click(function () {
+            $('.m-item').toggleClass('m-mobile-hide');
+        });
+        //通过CSS定位到相应区域
+        $('#payButton').popup({
+            popup: $('.payQR.popup'),
+            on:'click',
+            position:'bottom center',
+        });
+        //初始化
+        tocbot.init({
+            // Where to render the table of contents.显示目录的区域
+            tocSelector: '.js-toc',
+            // Where to grab the headings to build the table of contents.生成目录的源，内容
+            contentSelector: '.js-toc-content',
+            // Which headings to grab inside of the contentSelector element. 生成目录的级别
+            headingSelector: 'h1, h2, h3',
+        });
+        //鼠标移入微信图标后出现二维码
+        $('.wechat').popup({
+            popup: $('.wechat-qr.popup'),
+            position:'left center',
+        });
+        $('.toc.button').popup({
+            popup: $('.toc-container.popup'),
+            on:'click',
+            position:'left center',
+        });
+        //生成二维码的js代码  test 为二维码承载元素的id
+        var qrcode = new QRCode("qrcode", {
+            text: "http://jindo.dev.naver.com/collie",
+            width: 110,
+            height: 110,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+        //平滑滚动插件  失败
+        /*$('#toTop-button').click(function(){
+              $(window).scrollTo(0,500);
+        });*/
+
+    </script>
+</body>
+</html>

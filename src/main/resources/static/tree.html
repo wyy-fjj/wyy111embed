@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>数据结构--树笔记</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/typo.css">
+    <link rel="stylesheet" href="../static/lib/prism/prism.css">
+    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css">
+    <link rel="stylesheet" href="../static/css/me.css">
+    <style>
+        p{
+            text-indent: 2em !important;
+        }
+    </style>
+</head>
+<body>
+<!--导航-->
+<nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <!--为了适应手机端查看页面，添加stackable属性，代表可堆叠，给grid之前加上stackable-->
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui red header item">数据结构大学堂</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>线性表</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>查找算法</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>图</a>
+            <a href="#" class="active m-item item m-mobile-hide"><i class="mini file icon"></i>树</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>排序算法</a>
+            <div class="right m-item item m-mobile-hide">
+                <!-- transparent搜索框显示为透明 inverted颜色反转 -->
+                <div class="ui icon inverted white input">
+                    <input type="text" placeholder="搜索">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--点击再显示，加一个图标  menu toggle只是为了使用，另一种方法也可以用id  -->
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--中间内容-->
+
+<div  class="m-container-small m-padded-tb-big">
+    <div class="ui container">
+        <div class="ui top attached segment">
+            <!--头部-->
+            <div class="ui  horizontal link list">
+                <div class="item">
+                    <img src="https://picsum.photos/id/1015/100/100" alt="" class="ui avatar image">
+                    <div class="content"><a href="#" class="header">王煜仪</a> </div>
+                </div>
+                <div class="item">
+                    <i class="calendar icon"></i>2020-08-15
+                </div>
+                <div class="item">
+                    <i class="eye icon"></i>90
+                </div>
+            </div>
+        </div>
+        <div class="ui attached padded segment">
+            <!--内容部分-->
+            <div class="ui right aligned basic segment">
+                <div class="ui orange basic label">树--知识点整理</div>
+            </div>
+            <h2 class="ui center aligned header">树（一对多，非线性结构）</h2>
+            <br>
+            <div id="content" class="typo typo-selection js-toc-content  m-padded-lr-responsive m-padded-tb-large">
+                <h2 id="section1">一、树的定义 </h2>
+                <h4>1.1 树的基本概念</h4>
+                <p><b>树</b> 是由根结点和若干颗子树构成的。树是由一个集合以及在该集合上定义的一种关系构成的。集合中的元素称为树的结点，
+                    所定义的关系称为父子关系。父子关系在树的结点之间建立了一个层次结构。在这种层次结构中有一个结点具有特殊的地位，这个结点称为该树的根结点，或称为树根。可表示为如下：</p>
+                <h4>T = {D,R}</h4>
+                <p>D为树T中包含n个结点的有限集合，R为结点之间的关系的集合。</p>
+                <p>N=0，为空树；</p>
+                <p>n>0,R是D上某个二元关系的集合：</p>
+                <p>（1）根节点，没有直接前驱；</p>
+                <p>（2）除根结点，每个结点只有一个前驱；</p>
+                <p>（3）每个结点可以有零个或多个后继节点。</p>
+
+                <p>
+                    结点：表示树中的元素，包括数据项及若干指向其子树的分支；<br><p>
+                结点的度：表示结点拥有的子树个数；<br><p>
+                叶子：表示度为0的结点；<br><p>
+                树的度：表示一棵树中最大的结点度数(子树数）；<br><p>
+                孩子：表示结点的子树的根称为该结点的孩子（结点）；<br><p>
+                兄弟：表示同一双亲的孩子互称兄弟（结点）<br><p>
+                无序树：树中任意节点的子结点之间没有顺序关系，这种树称为无序树,也称为自由树;<br><p>
+                有序树：树中任意节点的子结点之间有顺序关系，这种树称为有序树；<br><p>
+                二叉树：每个节点最多含有两个子树的树称为二叉树；空树，只含根节点，左子树，右子树。<br><p>
+                完全二叉树：若设二叉树的高度为h，除第 h 层外，其它各层 (1～h-1) 的结点数都达到最大个数，第h层有叶子结点，
+                并且叶子结点都是从左到右依次排布，这就是完全二叉树。深度为k,n个节点，左儿子2i,右儿子2i+1，<br><p>
+                平衡二叉树：平衡二叉树又被称为AVL树（区别于AVL算法），它是一棵二叉排序树，且具有以下性质：它是一棵空树或它的
+                左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。<br><p>
+                满二叉树：除了叶结点外每一个结点都有左右子叶且叶子结点都处在最底层的二叉树。深度为k且有2k-1个结点数。
+            </p>
+                <h4>1.2 二叉树基本知识点</h4>
+                <p>一个有穷的节点的集合。这个集合可以为空。若不为空，则它是由根结点和左右两个不相交的二叉树组成。二叉树度为二，左右有
+                    区别。结点可以没有子节点，可以只有左结点，也可以只有右结点，也可以左右结点都有。</p>
+                <h5>1.2.1 二叉树的定义</h5>
+                <p>一个有穷的节点的集合。这个集合可以为空。若不为空，则它是由根结点和左右两个不相交的二叉树组成。二叉树度为二，左右有
+                    区别。结点可以没有子节点，可以只有左结点，也可以只有右结点，也可以左右结点都有。</p>
+                <h5>1.2.2 特殊二叉树</h5>
+                <p>
+                    斜二叉树，都只有左结点。<br><p>
+                满二叉树：每个结点都有左结点和右结点。<br><p>
+                完全二叉树：除了末尾几个没有结点了，按照满二叉树的顺序排。结点从上往下，从左往右。编号与满二叉树的编号相同。也就是从满二叉树的最后几个允许没有。
+            </p>
+                <h5>1.2.3 二叉树的几个性质</h5>
+                <p>
+                    二叉树的第i层的最大结点数为2^(i-1)。<br><p>
+                深度为k的二叉树的最大节点数为2^k-1。<br><p>
+                对于任何二叉树，度为2的节点的个数加一等于叶子节点的个数。
+            </p>
+                <h5>1.2.4 二叉树的抽象数据类型</h5>
+                <p>
+                    数据对象集合：一个有穷节点集合。<br><p>
+                操作集：判断是不是空，遍历，创建。遍历是最主要的操作：先序遍历--根、左树、右树；中序遍历--左树、根、右树；
+                后序遍历--左树、右树、根；层次遍历--从上到下，从左到右。
+            </p>
+                <h5>1.2.5 二叉树的存储结构</h5>
+                <p>
+                    顺序存储：数组可不可以，完全二叉树用数组可以，从上往下从左往右编号。非根结点，父节点的序号是它的二分之一取整；
+                    左儿子是它的二倍，右儿子是二倍加一。<br><p>
+                链表存储：每个节点有数据和左儿子指针和右儿子指针。
+            </p>
+                <h5>1.2.6 完全二叉树</h5>
+                <p><b>完全二叉树</b> 是一种很”饱满“的树：它的所有节点尽可能从上到下、从左到右地将每层都填满。用定义来说，若二叉树的深度为h，那么第1到h-1层的节点达到最大个数，第h层的节点都集中在最左边，就是完全二叉树。</p>
+                <pre class="language-css"><code class="language-css">
+      num=0;
+void CBinTree(int root,int N){
+       /* N: number of nodes*/
+       /*inorder: preorder traversal results*/
+	if(root>N)
+		return;
+	CBinTree(root*2,N);
+	TreeNodes[root]=inorder[num++];
+	CBinTree(root*2+1,N);
+}</code></pre>
+
+
+                <h2 id="section2">二、 树的遍历 </h2>
+                <p>树的遍历分为先序遍历（根左右）、中序遍历（左根右）、后序遍历（左右根）；</p>
+                <h4>2.1 二叉树遍历的实现</h4>
+                <p><b>前序遍历（preorder traversal)：</b>对于所有节点，访问顺序遵循：父节点->左子树->右子树的逻辑。</p>
+                <pre class="language-css"><code class="language-css">
+              // --- 前序遍历 ---
+                  void PreorderTraversal( BinTree BT ){
+	if (BT){
+                /*
+                 * do something here
+                 */
+		printf("%d ",BT->Data);
+                /*Recursion. From left to right*/
+		PreorderTraversal(BT->Left);
+		PreorderTraversal(BT->Right);
+	}
+}</code></pre>
+                <p><b>中序遍历（order traversal)：</b>的顺序为左子树->右子树->根节点。因而只需要把上述/do something here*/的位置挪到两次递归后就可以了。</p>
+                <pre class="language-css"><code class="language-css">
+              // --- 中序遍历 ---
+                 void InorderTraversal( BinTree BT ){
+	if>Data);
+
+		InorderTraversal(BT->Left);
+                /*
+                 * do something here
+                 */
+		printf("%d ",BT->Data);
+		InorderTraversal(BT->Right);
+	}
+}</code></pre>
+                <p><b>后序遍历（Postinorder traversal)：</b>和前序遍历的区别是遍历顺序改为左子树->父节点->右子树。因而只需要把上述/do something here*/的位置换一下就可以了。</p>
+                <pre class="language-css"><code class="language-css">
+              // --- 后序遍历 ---
+                 void PostorderTraversal( BinTree BT ){
+	if>Data);
+
+		PostorderTraversal(BT->Left);
+		PostorderTraversal(BT->Right);
+                /*
+                 * do something here
+                 */
+		printf("%d ",BT->Data);
+	}
+}</code></pre>
+                <p><b>层次遍历（Postinorder traversal)：</b>将二叉树看作一栋楼，每层有不同数目的房间，按照从上到下、从左到右的顺序依次访问节点。实现程序不再使用递归，而是使用了“先进先出”的queue容器。</p>
+                <pre class="language-css"><code class="language-css">
+              // --- 层次遍历 ---
+                void LevelTraversal(BinTree root){
+	queue<BinTree> q;
+	q.push(root);
+	while(!q.empty()){
+		BinTree front = q.front();
+		/*
+		 * do something here
+		 */
+		cout<<front->Data<<' ';
+		q.pop();
+		if(front->Left)
+			q.push(front->Left);
+		if(front->Right)
+			q.push(front->Right);
+	}
+}</code></pre>
+                <h2 id="section3">三、二叉链表创建函数 </h2>
+                <h4>3.1静态方式构建二叉树</h4>
+                <pre><code class="language-css">
+初始化：Typedef struct BitNode
+{
+	Tlelemtype data;
+	Struct BitNode *lchild,*rchild;
+
+} BitNode;
+创建结点空间：
+BiTree cresteBiTree()
+{
+创造结点空间
+}
+实现结点之间关系存储
+</code></pre>
+                <h4>3.2动态方式构建二叉树</h4>
+                <p>a.输入二叉树结点数据；</p>
+                <p>b.申请结点信息；</p>
+                <p>c.存入数据；</p>
+                <p>d.递归构造左子树；</p>
+                <p>e.递归构造右子树.</p>
+                <h2 id="section4">四、二叉树表示法（儿子兄弟表示法） </h2>
+                <p>儿子兄弟表示法：结点中包含本结点的数据和两个指针，分别为指向第一个儿子和下一个兄弟；</p>
+                <p><b>优点：</b><br><p>（1）树中结点结构式相同的。包含两个指针域和一个数据域。</p>
+                <p>（2）浪费空间少：n个结点的树浪费空间为n+1。</p>
+                <p>儿子兄弟表示法：结点中包含本结点的数据和两个指针，分别为指向第一个儿子和下一个兄弟；</p>
+                <p>树到二叉树的转化：</p>
+                <p>（1）画出树对应的儿子兄弟链表；<br><p>
+                （2）将链表理解为一颗二叉树的二叉链表；<br><p>
+                （3）根据二叉链表画出二叉树；
+            </p>
+
+                <h2 id="section5">五、哈夫曼树 </h2>
+                <h4>5.1 构建方法</h4>
+                <p>（1）将权值从小到大排序；</p>
+                <p>（2）将权值最小的两个结点合并，新节点权值为所合并两个结点权值之和，得到一颗新二叉树；</p>
+                <p>（3）重复步骤1，2，直至剩下一颗二叉树，为哈夫曼树。</p>
+                <p>哈夫曼树特点：不唯一、其子树也是哈夫曼树、无度为1的结点、n个叶子节点的哈夫曼树总结点为2n-1。</p>
+                <h2>5.2 初始化</h2>
+                <pre><code class="language-css">
+Typedef struct{
+	Int weight;
+	Int parent,lchild,rchild;
+}HTNode,*HuffmanTree;
+</code></pre>
+
+                <h4>5.3 哈夫曼编码</h4>
+                <p> （1）不等长编码方式；<br><p>
+                （2）出现次数多的字符串编码短，出现次数多的字符编码长;<br><p>
+                （3）编码：从叶节点到根节点的过程;<br><p>
+                （4）译码：从根节点到叶节点的过程</p>
+
+
+                <div class="ui attached positive message ">
+                    <!--博客信息说明-->
+                    <div class="ui middle aligned grid">
+                        <div class="eleven wide column">
+                            <ui class=" list">
+                                <li>作者：王煜仪</li>
+                                <li>发表时间：2020-08-15</li>
+                                <li>版权声明：自由转载-非商用</li>
+                                <li>邮箱联系：876047356@qq.com</li>
+                            </ui>
+                        </div>
+                        <div class="five wide column">
+                            <img src="../static/images/2.png" alt="" class="ui right floated rounded bordered image" style="width: 130px">
+                        </div>
+                    </div>
+                </div>
+                <div id="comment-container" class="ui bottom attached segment">
+                    <!--留言区域列表-->
+                    <div class="ui teal segment">
+                        <div class="ui comments">
+                            <h3 class="ui dividing header"><trans oldtip="Comments" newtip="评论">Comments</trans></h3>
+                            <div class="comment">
+                                <a class="avatar">
+                                    <img src="https://picsum.photos/id/1008/200/200">
+                                </a>
+                                <div class="content">
+                                    <a class="author"><trans oldtip="hanqi" newtip="韩七">韩七</trans></a>
+                                    <div class="metadata">
+                                        <span class="date"><trans oldtip="Today at 2：38PM" newtip="今天下午2：38">Today at 2：38PM</trans></span>
+                                    </div>
+                                    <div class="text"><trans oldtip=" good article！ " newtip="顶！"> How artistic! </trans></div>
+                                    <div class="actions">
+                                        <a class="reply">回复</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="ui form">
+                            <div class="filed">
+                                <textarea name="content" placeholder="请输入评论信息..."></textarea>
+                            </div>
+                            <div class="fields">
+                                <div class="field m-mobile-wide m-margin-bottom-small">
+                                    <div class="ui left icon input">
+                                        <i class="user icon"></i>
+                                        <input type="text" name="nickname" placeholder="姓名">
+                                    </div>
+                                </div>
+                                <div class="field m-mobile-wide m-margin-bottom-small">
+                                    <div class="ui left icon input">
+                                        <i class="mail icon"></i>
+                                        <input type="text" name="email" placeholder="邮箱">
+                                    </div>
+                                </div>
+                                <div class="field m-mobile-wide m-margin-bottom-small">
+                                    <button class="ui blue button m-mobile-wide m-margin-bottom-small"><i class="edit icon"></i> 发布</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div   class="m-padded m-fixed m-right-bottom "  >
+                <div class="ui vertical icon buttons ">
+                    <button type="button" class="ui toc blue button">目录</button>
+                    <a href="#comment-container" class="ui blue button">留言</a>
+                    <button type="button" class="ui wechat icon button"><i class="weixin icon"></i> </button>
+
+
+                    <a href="#" class="ui icon button"><i class="chevron up icon"></i></a>
+                    <!--直接返回顶部修改为平滑滚动到顶部-->
+                    <!--<div id="toTop-button" class="ui icon button"><i class="chevron up icon"></i> </div>-->
+                </div>
+                <!--生成二维码  将已经写死的二维码注释掉，既可以随机生成二维码-->
+                <div id="qrcode" class="ui wechat-qr flowing popup transition hidden " style="width: 130px !important;">
+                    <!--
+                      <div id="qrcode" class="ui wechat-qr flowing popup transition hidden m-padded-mini" style="width: 130px !important;">
+                      <img src="images/wechat.jpg" alt="" class="ui rounded image "  style="width:120px !important;">
+                    -->
+                </div>
+            </div>
+            <!--生成目录-->
+            <div class="ui toc-container flowing popup  transition hidden" style="width:250px !important;">
+                <ol class="js-toc">
+
+                </ol>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+            <!--<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>-->
+
+            <script src="..//static/lib/prism/prism.js"></script>
+            <script src="..//static/lib/tocbot/tocbot.min.js"></script>
+            <script src="..//static/lib/qrcode/qrcode.min.js"></script>
+
+            <script>
+
+
+                //item使用其来引用到m-mobile-hidden  用以判断显示display
+                $('.menu.toggle').click(function () {
+                    $('.m-item').toggleClass('m-mobile-hide');
+                });
+                //通过CSS定位到相应区域
+                $('#payButton').popup({
+                    popup: $('.payQR.popup'),
+                    on:'click',
+                    position:'bottom center',
+                });
+                //初始化
+                tocbot.init({
+                    // Where to render the table of contents.显示目录的区域
+                    tocSelector: '.js-toc',
+                    // Where to grab the headings to build the table of contents.生成目录的源，内容
+                    contentSelector: '.js-toc-content',
+                    // Which headings to grab inside of the contentSelector element. 生成目录的级别
+                    headingSelector: 'h1, h2, h3',
+                });
+                //鼠标移入微信图标后出现二维码
+                $('.wechat').popup({
+                    popup: $('.wechat-qr.popup'),
+                    position:'left center',
+                });
+                $('.toc.button').popup({
+                    popup: $('.toc-container.popup'),
+                    on:'click',
+                    position:'left center',
+                });
+                //生成二维码的js代码  test 为二维码承载元素的id
+                var qrcode = new QRCode("qrcode", {
+                    text: "http://jindo.dev.naver.com/collie",
+                    width: 110,
+                    height: 110,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+                //平滑滚动插件  失败
+                /*$('#toTop-button').click(function(){
+                      $(window).scrollTo(0,500);
+                });*/
+
+            </script>
+</body>
+</html>

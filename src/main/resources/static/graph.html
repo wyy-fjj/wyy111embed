@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>数据结构--图</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/typo.css">
+    <link rel="stylesheet" href="../static/lib/prism/prism.css">
+    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css">
+    <link rel="stylesheet" href="../static/css/me.css">
+    <style>
+        p{
+            text-indent: 2em !important;
+        }
+    </style>
+</head>
+<body>
+<!--导航-->
+<nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <!--为了适应手机端查看页面，添加stackable属性，代表可堆叠，给grid之前加上stackable-->
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui red header item">数据结构大学堂</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>线性表</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>查找算法</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>树</a>
+            <a href="#" class="active m-item item m-mobile-hide"><i class="mini file icon"></i>图</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini file icon"></i>排序算法</a>
+            <div class="right m-item item m-mobile-hide">
+                <!-- transparent搜索框显示为透明 inverted颜色反转 -->
+                <div class="ui icon inverted white input">
+                    <input type="text" placeholder="搜索">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--点击再显示，加一个图标  menu toggle只是为了使用，另一种方法也可以用id  -->
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--中间内容-->
+
+<div  class="m-container-small m-padded-tb-big">
+    <div class="ui container">
+        <div class="ui top attached segment">
+            <!--头部-->
+            <div class="ui  horizontal link list">
+                <div class="item">
+                    <img src="https://picsum.photos/id/1015/100/100" alt="" class="ui avatar image">
+                    <div class="content"><a href="#" class="header">王煜仪</a> </div>
+                </div>
+                <div class="item">
+                    <i class="calendar icon"></i>2020-08-15
+                </div>
+                <div class="item">
+                    <i class="eye icon"></i>90
+                </div>
+            </div>
+        </div>
+        <div class="ui  attached segment">
+            <!--图片区域-->
+            <img src="../static/images/tu1.png" alt="" class="ui fluid rounded image">
+        </div>
+        <div class="ui attached padded segment">
+            <!--内容部分-->
+            <div class="ui right aligned basic segment">
+                <div class="ui orange basic label">图--知识点整理</div>
+            </div>
+            <h2 class="ui center aligned header">图</h2>
+            <br>
+            <div id="content" class="typo typo-selection js-toc-content  m-padded-lr-responsive m-padded-tb-large">
+                <h2 id="section1">一、图的基本概要 </h2>
+                <h4>1.图的定义</h4>
+                <p><b>图</b> 可表示Graph = (V,E)</p>
+                <p>V:顶点（数据元素）的有穷集合</p>
+                <p>E:边的有穷集合</p>
+                <p>Path(x,y)表示从x到y的一条单向道路</p>
+                <p>有向边：< x,y >与< y,x>不等</p>
+                <p>无向边：（x,y）=(y,x)</p>
+                <h4>2.完全图</h4>
+                <p>无向完全图：n个顶点的无向图最大边数是n(n-1)/2</p>
+                <p>有向完全图：n个顶点的无向图最大边数是n(n-1)</p>
+                <h4>3.图的基本术语</h4>
+                <p>稀疏图：含有很少边或弧</p>
+                <p>稠密图：含有很多边或弧</p>
+                <p>权：与图的边或者弧相关的数</p>
+                <p>网：带权的图，即标出每两点间距离的图</p>
+                <p>度：在无向图中顶点边的数目</p>
+                <p>入度：有向图中顶点入边的数目</p>
+                <p>出度：有向图中顶点出边的数目</p>
+                <p>有向图顶点的度：有向图中顶点出边的数目</p>
+                <p>入度之和=出度之和=边的总数</p>
+                <p>路径：从顶点1到顶点2的</p>
+                <p>路径长度：路径上经过的边的数目</p>
+                <p>回路：一条路径上的前后两个断点相同，起点终点重合</p>
+                <p>顶点连通：顶点1到2有路径，则称可连通</p>
+                <p>连通图：任何两点都连通的无向图</p>
+                <p>连通分量：无向图的极大连通子图</p>
+                <p>强连通图：任何两点都互相连通的有向图</p>
+                <p>最小生成树：连通图的所有生成树中权值之和最小的生成树</p>
+
+
+
+                <h4>4.图的表示方法</h4>
+                <h5>4.1 邻接矩阵表示法</h5>
+                <p>
+                    带权图：将邻接矩阵中值为1的元素用相应的权值代替；值为0的元素用无穷大代替。
+                </p>
+                <p>邻接矩阵的优缺点：</p>
+                <p>(1)简单、直观、易于理解</p>
+                <p>(2)方便检查任何一对顶点之间是否存在边</p>
+                <p>(3)方便计算任一顶带你的度</p>
+                <p>(4)方便求任一顶点的所有邻接点</p>
+                <p>(5)浪费空间：稀疏图</p>
+                <p>(6)浪费时间：统计稀疏图的总边数</p>
+                <p>邻接矩阵数据结构定义：</p>
+                <pre class="language-css"><code class="language-css">
+Typedef struct{
+	Int Nv;
+	Int Ne;
+	WeightType A[MaxVexNum][ MaxVexNum];
+	Vextype Vex[MaxVexNum
+}AMGraph;
+</code></pre>
+                <h5>4.2 图的邻接表表示法</h5>
+                <p>采用链式结构存储</p>
+                <p>顶点的链接表由顶点的所有邻接点构成</p>
+                <p>图的邻接表由所有顶点邻接表构成</p>
+                <p>头结点：头结点包含顶点自身的信息域和指向该顶点的邻接表</p>
+                <p>边结点：边结点包含邻接点、边的信息、指针域</p>
+
+                <h5>4.3 逆邻接表</h5>
+                <p>顶点的逆邻接表由进来的边的另一个端点构成</p>
+                <p>图的逆邻接表由所有顶点的逆邻接表构成</p>
+                <div style="text-align: center;">
+                    <img alt="" src="../static/images/graph-2.gif" style="width: 420px; height: 186px;" /><br />
+                    逆邻接表示意图</div>
+                <p><b>邻接表的存储空间</b></p>
+                <p>对于有n个顶点e条边的有向图，用邻接表存储需要n+e个单元</p>
+                <p>对于有n个顶点e条边的无向图，用邻接表存储需要n+2e个单元</p>
+                <h5>4.4 图的深度优先遍历</h5>
+                <p><b>基本思想</b></p>
+                <p>刚开始，图中所有的顶点都没有访问，首先从图的某一个顶点V0出发，访问此顶点，然后依次从V0的未被访问的邻接点出发，深度优先遍历，直至图中所有和V0相通的顶点都被访问到，若此时图还有未被访问的顶点，则另选一个未被访问的顶点作为新起点，重复上述过程，直至所有顶点都被访问为止。</p>
+                <p><b>结论</b></p>
+                <p>深度优先遍历序列和生成树或者生成森林都不唯一;<br>深度优先遍历是树的先序遍历的推广。</p>
+                <pre class="language-css"><code class="language-css">
+                 #深度优先遍历
+                Void DFS(Vertex V)
+                {
+                  visited[V] = true;
+                  for (V的每个邻接点 W)
+                    if(!visited[W])
+                        DFS(W)
+                }</code></pre>
+                <h5>4.5 广度优先遍历</h5>
+                <p>首先从图的某一个顶点V0出发，访问该顶点后，依次访问V0的各个未被访问的邻接点，然后分辨从这些邻接点出发，依次访问他们的邻接点，并按这些顶点被访问的次序来访问他们的邻接点，重复上述过程，直至访问结束。</p>
+                <p><b>结论</b></p>
+                <p>广度优先遍历类似于树的层序遍历。</p>
+                <pre class="language-css"><code class="language-css">
+                 #广度优先遍历
+                void BFS (Vertex V)
+                  {
+                visited[V] = true;
+                Enqueue(V,Q);
+                while (!IsEmpty(Q))
+                  {  V = Dequeue(Q);
+                     for (V的每个邻接点W)
+                        if (!visited[W])
+                          {  visited[W] = true;
+                             Enqueue(W,Q);
+                          }
+                   }
+                  }</code></pre>
+
+
+
+
+
+                <h2 id="section2">二、最小生成树总结</h2>
+                <p>找权值之和最小的极小连通子网，问题转换为在连通网中找一颗生成树<br>最小生成树存在<->图连通</p>
+                <h4>1.Prim算法（普利姆算法）</h4>
+                <p>Prim算法简单描述:</p>
+                <p>1).输入：一个加权连通图，其中顶点集合为V，边集合为E；</p>
+                <p>2).初始化：Vnew = {x}，其中x为集合V中的任一节点（起始点），Enew = {},为空；</p>
+                <p>3).重复下列操作，直到Vnew = V：</p>
+                <p>a.在集合E中选取权值最小的边 < u, v>，其中u为集合Vnew中的元素，而v不在Vnew集合当中，并且v∈V（如果存在有多条满足前述条件即具有相同权值的边，则可任意选取其中之一）；</p>
+                <p>b.将v加入集合Vnew中，将<u, v>边加入集合Enew中；</p>
+                <p>4).输出：使用集合Vnew和Enew来描述所得到的最小生成树。</p>
+                <p><b>下面为一个例子</b></p>
+                <img alt="" src="../static/images/tu2.png" style="width:200px; height: 156px;" /><br />
+                <p>此图为原始的加权连通图，每条边一侧的数字代表其权值。</p>
+                <img alt="" src="../static/images/tu3.png" style="width:200px; height: 156px;" /><br />
+                <p>以D为起点，已选集合U为{D}可知A,B,C,D均与D相连，A与D之间边的权值最小为5，因此将A加入集合U{D,A}。此时未选的为B,C,E,F,G。</p>
+                <img alt="" src="../static/images/tu4.png" style="width:200px; height: 156px;" /><br />
+                <p>下一个顶点为距离A或D距离最近的顶点，在A-B,D-E,D-F中选择D-F权值为6最小，因此将F加入集合U{D,A,F}，此时未选的顶点为B,C,E,G。</p>
+                <img alt="" src="../static/images/tu5.png" style="width:200px; height: 156px;" /><br />
+                <p>重复上面算法，这一步选择A-B权值为7，将B加入集合{D,A,F,B}，此时未选的顶点为C,E,G。</p>
+                <img alt="" src="../static/images/tu6.png" style="width:200px; height: 156px;" /><br />
+                <p>继续重复算法，这一步选择B-E权值为7，将E加入集合U{D,A,F,B,E}，此时未选的顶点为C,G。</p>
+                <img alt="" src="../static/images/tu7.png" style="width:200px; height: 156px;" /><br />
+                <p>重复算法，这一步选择E-C权值为5，将C加入集合U{D,A,F,B,E,C}，此时未选的顶点为G。</p>
+                <img alt="" src="../static/images/tu8.png" style="width:200px; height: 156px;" /><br />
+                <p>最后一步，选择距离顶点G最近的顶点，为E-G权值为9，将G加入集合U{D,A,F,B,E,C,G}。</p>
+                <p>如下是prim算法程序</p>
+                <pre class="language-css"><code class="language-css">
+   void MiniSpanTree_Prim(AMGraph G,VerTexType u)
+{//无向网G以邻接矩阵形式存储，从顶点u出发构造G的最小生成树，输出T的各条边
+    k = LocateVex(G,u);//k为顶点u的下标
+    for(j=0 ;j&lt;G.vexnum;++j)//对于V-U的每一个顶点vj,初始化closedge[j]
+          if (j!=k) closedge[j] = {u,G.arcs[k][j]};//{adjvex,lowcost}
+    closedeg[k].lowcost = 0;//初始，U={u}
+    for(i=1;i&lt;G.vexnum;++i)
+    {//选择其余n-1个顶点，生成n-1条边（n = G.vexnum）
+          k= Min(colsedge);
+//求出T的下一个结点，第k个顶点，closedge[k]中存有当前最小边
+          u0 = closedge[k].adjvex;//u0为最小边的一个顶点，u0 ∈U
+          v0 = G.vexs[k];//v0为最小边的另一个顶点，v0∈V-U
+          cout&lt;&lt;u0&lt;&lt;v0;//输出当前最小边（u0,v0）
+          closedge[k].lowcost = 0;//第k个顶点并入U集
+          for(j=0;j&lt;G.vexnum;++i)
+                if(G.arcs[k][j] &lt; closedge[j].lowcost)//新顶点并入U后重新选择最小边
+                        colsedge[j] = {G.vexs[k],G.arcs[k][j]};}
+    }</code></pre>Kruskal算法简单描述
+                <h4>Kruskal算法（克鲁斯卡尔算法）</h4>
+                <p>:</p>
+                <p>1).记Graph中有v个顶点，e个边</p>
+                <p>2).新建图Graphnew，Graphnew中拥有原图中相同的e个顶点，但没有边</p>
+                <p>3).将原图Graph中所有e个边按权值从小到大排序</p>
+                <p>4).循环：从权值最小的边开始遍历每条边 直至图Graph中所有的节点都在同一个连通分量中，如果这条边连接的两个节点于图Graphnew中不在同一个连通分量中，添加这条边到图Graphnew中。</p>
+                <p><b>下面是一个例子</b></p>
+                <img alt="" src="../static/images/tu9.png" style="width:200px; height: 156px;" /><br />
+                <p>首先第一步，有一张图Graph，有若干顶点和边；</p>
+                <img alt="" src="../static/images/tu10.png" style="width:200px; height: 156px;" /><br />
+                <p>将所有的边的长度排序，用排序的结果作为选择边的依据，排序完成后，率先选择了边A-D权值为5；</p>
+                <img alt="" src="../static/images/tu11.png" style="width:200px; height: 156px;" /><br />
+                <p>在剩下的边中寻找。找到了C-E。这里边的权重也是5；</p>
+                <img alt="" src="../static/images/tu12.png" style="width:200px; height: 156px;" /><br />
+                <p>依次类推找到了权值6,7,7，即D-F，A-B，B-E</p>
+                <img alt="" src="../static/images/tu13.png" style="width:200px; height: 156px;" /><br />
+                <p>下面继续选择，B-C或者E-F尽管现在长度为8的边是最小的未选择的边。但是现在他们已经连通了（对于B-C可以通过C-E,E-B来连接，类似的E-F可以通过E-B,B-A,A-D,D-F来接连）。所以不需要选择他们。类似的B-D也已经连通了。最后就剩下E-G和F-G了。选择了权值更小的E-G。</p>
+                <p>如下是Kruskal算法程序</p>
+                <pre class="language-css"><code class="language-css">
+    void MiniSpanTree_Kruskal(MGraph G)
+    {//无向网以邻接矩阵形式存储，构造G的最小数T，输出T的各条边
+      sort(Edge);//将数组Edge中的元素按权值从小到大排序
+      for(i=0;i&lt;G.vexnum;i++)//辅助数组，表示各个顶点自成一个连通分量
+            Vexset[i] = i;
+      for(i=0;i&lt;G.arcnum;i++)//依次查看数组Edge中的边
+      {
+              v1 = LocateVex(G,Edge[i].Head);//v1为边的始点Head的下标
+              v2 = LocateVex(G,Edge[i].Tail);//v2为边的终点Tail的下标
+              vs1 = Vexset[v1];//获取边Edge[i]的始点所在的连通分量vs1
+              vs2 = Vexset[v2];//获取边Edge[i]的终点所在的连通分量vs2
+              if(vs1 != vs2)//边的两个顶点分属不同的连通分量
+              {
+                      cout &lt;&lt; Edge[i].Head&lt;&lt;Edge[i].Tail;//输出此边
+                      for(j=0 ; j&lt;G.vexnum;j++)//合并vs1 vs2两个分量，即两个集合统一编号
+                            if(Vexset[j] == vs2)  Vexset[j] =vs1;//集合编号为vs2的都改为vs1
+              }
+      }
+    }
+    </code></pre>
+
+
+
+
+                <h2 id="section3">三、拓扑排序</h2>
+                <p>1).AOV网：顶点表示活动，用有向边表示活动之间的优先关系的有向图。</p>
+                <p><b>注：不允许出现环，这意味着某项活动应以自己为先决条件。</b></p>
+                <p>2)若 < Vi，Vj >是图中有向边，则Vi是Vj的直接前驱, Vj是Vi的直接后继。</p>
+                <p>3)拓扑序列：拓扑排序所得到的序列。</p>
+                <p>4)拓扑排序的方法：</p>
+                <p>a.在有向图中选一个没以前驱的顶点且输出；</p>
+                <p>b.从图中删除该顶点和所有以它为尾的弧；</p>
+                <p>c.重复上述步骤，直至全部顶点均已输出；或者当图中不存在无前驱的结点为止。</p>
+                <p><b>拓扑排序的过程是判断一个图是否有环的过程</b></p>
+                <p><b>下面是一个例子</b></p>
+                <img alt="" src="../static/images/tu14.png" style="width:256px; height: 240px;" /><br />
+                <p>首先找到无前驱的顶点C1,C9，然后先输出C1并删除顶点C1以及以它为尾的弧；</p>
+                <img alt="" src="../static/images/tu15.png" style="width:262px; height: 240px;" /><br />
+                <p>接着再从C2、C4、C9这三个无前驱结点中选择一个删除掉，先选择删除C2，输出C2，并删除以它为尾的弧；</p>
+                <img alt="" src="../static/images/tu16.png" style="width:914px; height: 400px;" /><br />
+                <img alt="" src="../static/images/tu17.png" style="width:914px; height: 400px;" /><br />
+                <img alt="" src="../static/images/tu18.png" style="width:914px; height: 256px;" /><br />
+                <img alt="" src="../static/images/tu19.png" style="width:914px; height: 294px;" /><br />
+                <img alt="" src="../static/images/tu20.png" style="width:914px; height: 298px;" /><br />
+                <p>最终得拓扑序列：C1--C2--C3--C4--C5--C7--C9--C10--C11--C6--C12--C8</p>
+                <h2 id="section4">四、图的最短路径</h2>
+                <p>单元最短路径问题：从某个固定的原点出发，求这个原点到其他所有顶点的最短距离</p>
+                <p>多源最短路径问题：求任意两个顶点之间的最短距离。</p>
+                <h4>4.1 Dijsktra算法</h4>
+                <p>按照路径长度递增（非递减）的顺序产生最短路径。适用于有向图和无向图。
+                    <br> <b>基本思想</b>
+                </p>
+                <p>1.指定一个起始点s</p>
+                <p>2.此外，引进两个集合S,U，S的作用是记录已求出最短路径的顶点(以及相应的最短路径长度)，而U则是记录还未求出最短路径的顶点(以及该顶点到起点s的距离)</p>
+                <p>3.初始时，S中只有起点s；U中是除s之外的顶点，并且U中顶点的路径是”起点s到该顶点的路径”。然后，从U中找出路径最短的顶点，并将其加入到S中；接着，更新U中的顶点和顶点对应的路径。然后，再从U中找出路径最短的顶点，并将其加入到S中；接着，更新U中的顶点和顶点对应的路径。</p>
+                <p><b>下面为一个例子</b></p>
+                <img alt="" src="../static/images/tu21.png" style="width:554px; height: 169px;" /><br />
+                <img alt="" src="../static/images/tu22.png" style="width:554px; height: 169px;" /><br />
+
+                <img alt="" src="../static/images/tu23.png" style="width:554px; height: 169px;" /><br />
+                <img alt="" src="../static/images/tu24.png" style="width:554px; height: 169px;" /><br />
+                <img alt="" src="../static/images/tu25.png" style="width:554px; height: 169px;" /><br />
+                <img alt="" src="../static/images/tu26.png" style="width:554px; height: 169px;" /><br />
+                <img alt="" src="../static/images/tu27.png" style="width:554px; height: 169px;" /><br />
+
+
+                <h4>4.2 Floyd算法</h4>
+                <p>特点：把每一条最短路径不是一次确定，而是逐步形成；适用于用邻接矩阵存储的稠密图的多源路径最短问题</p>
+                <p><b>下面通过一个例子来理解</b></p>
+                <p>a）如图：存在0,1,2,3 ,4个点，两点之间的距离就是边上的数字，如果两点之间，没有边相连，则无法到达，为无穷大。</p>
+                <p>b）要让任意两点（例如从顶点a点到顶点b）之间的路程变短，只能引入第三个点（顶点k），并通过这个顶点k中转即a->k->b，才可能缩短原来从顶点a点到顶点b的路程。那么这个中转的顶点k是0~n中的哪个点呢？</p>
+                <img alt="" src="../static/images/tu28.png" style="width:350px; height: 304px;" /><br />
+                <p>首先根据图创建一个邻接矩阵，进而再创建一个path矩阵，用于存放任意一对顶点之间的最短路径</p>
+                <img alt="" src="../static/images/tu29.png" style="width:900px; height: 262px;" /><br />
+                <p>从0开始作为中转点，循环执行以下步骤：</p>
+                <p>1.用i，j两个变量分别指向二元组里的两个元素，比如{0，1}这个二元组，i指向0；j指向1。从0开始作为中转的点</p>
+                <p>2.判断 (A[ i ][ 0 ]+A[ 0 ][ j ] ) < A[ i ][ j ] （即判断 i -> j，i点到j点的距离是否小于从0点中转的距离），如果false，则判断下一组二元数组。</p>
+                <p>3. 如果表达式为真，更新A[i][j]的值为A[i][0]+A[0][j]，Path[i] [j]的值为点0（即设置i到j要经过0点中转）</p>
+                <img alt="" src="../static/images/tu30.png" style="width:900px; height: 262px;" /><br />
+                <p>如果某两个点之间的中转点不止一个，通过逐层递进，递归的过程，最终得到两个顶点的距离。</p>
+
+
+
+
+
+                <div class="ui attached positive message ">
+                    <!--博客信息说明-->
+                    <div class="ui middle aligned grid">
+                        <div class="eleven wide column">
+                            <ui class=" list">
+                                <li>作者：王煜仪</li>
+                                <li>发表时间：2020-08-15</li>
+                                <li>版权声明：自由转载-非商用</li>
+                                <li>邮箱联系：876047356@qq.com</li>
+                            </ui>
+                        </div>
+                        <div class="five wide column">
+                            <img src="../static/images/2.png" alt="" class="ui right floated rounded bordered image" style="width: 130px">
+                        </div>
+                    </div>
+                </div>
+                <div id="comment-container" class="ui bottom attached segment">
+                    <!--留言区域列表-->
+                    <div class="ui teal segment">
+                        <div class="ui comments">
+                            <h3 class="ui dividing header"><trans oldtip="Comments" newtip="评论">Comments</trans></h3>
+                            <div class="comment">
+                                <a class="avatar">
+                                    <img src="https://picsum.photos/id/1033/200/200">
+                                </a>
+                                <div class="content">
+                                    <a class="author"><trans oldtip="lisi" newtip="李四">李四</trans></a>
+                                    <div class="metadata">
+                                        <span class="date"><trans oldtip="Today at 2：38PM" newtip="Today at 2：38PM">Today at 2：38PM</trans></span>
+                                    </div>
+                                    <div class="text"><trans oldtip=" good article！ " newtip="good article！"> good article </trans></div>
+                                    <div class="actions">
+                                        <a class="reply">回复</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="ui form">
+                            <div class="filed">
+                                <textarea name="content" placeholder="请输入评论信息..."></textarea>
+                            </div>
+                            <div class="fields">
+                                <div class="field m-mobile-wide m-margin-bottom-small">
+                                    <div class="ui left icon input">
+                                        <i class="user icon"></i>
+                                        <input type="text" name="nickname" placeholder="姓名">
+                                    </div>
+                                </div>
+                                <div class="field m-mobile-wide m-margin-bottom-small">
+                                    <div class="ui left icon input">
+                                        <i class="mail icon"></i>
+                                        <input type="text" name="email" placeholder="邮箱">
+                                    </div>
+                                </div>
+                                <div class="field m-mobile-wide m-margin-bottom-small">
+                                    <button class="ui blue button m-mobile-wide m-margin-bottom-small"><i class="edit icon"></i> 发布</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div   class="m-padded m-fixed m-right-bottom "  >
+                <div class="ui vertical icon buttons ">
+                    <button type="button" class="ui toc blue button">目录</button>
+                    <a href="#comment-container" class="ui blue button">留言</a>
+                    <button type="button" class="ui wechat icon button"><i class="weixin icon"></i> </button>
+
+
+                    <a href="#" class="ui icon button"><i class="chevron up icon"></i></a>
+                    <!--直接返回顶部修改为平滑滚动到顶部-->
+                    <!--<div id="toTop-button" class="ui icon button"><i class="chevron up icon"></i> </div>-->
+                </div>
+                <!--生成二维码  将已经写死的二维码注释掉，既可以随机生成二维码-->
+                <div id="qrcode" class="ui wechat-qr flowing popup transition hidden " style="width: 130px !important;">
+                    <!--
+                      <div id="qrcode" class="ui wechat-qr flowing popup transition hidden m-padded-mini" style="width: 130px !important;">
+                      <img src="images/wechat.jpg" alt="" class="ui rounded image "  style="width:120px !important;">
+                    -->
+                </div>
+            </div>
+            <!--生成目录-->
+            <div class="ui toc-container flowing popup  transition hidden" style="width:250px !important;">
+                <ol class="js-toc">
+
+                </ol>
+            </div>
+
+
+
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+            <!--<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>-->
+
+            <script src="..//static/lib/prism/prism.js"></script>
+            <script src="..//static/lib/tocbot/tocbot.min.js"></script>
+            <script src="..//static/lib/qrcode/qrcode.min.js"></script>
+
+            <script>
+
+
+                //item使用其来引用到m-mobile-hidden  用以判断显示display
+                $('.menu.toggle').click(function () {
+                    $('.m-item').toggleClass('m-mobile-hide');
+                });
+                //通过CSS定位到相应区域
+                $('#payButton').popup({
+                    popup: $('.payQR.popup'),
+                    on:'click',
+                    position:'bottom center',
+                });
+                //初始化
+                tocbot.init({
+                    // Where to render the table of contents.显示目录的区域
+                    tocSelector: '.js-toc',
+                    // Where to grab the headings to build the table of contents.生成目录的源，内容
+                    contentSelector: '.js-toc-content',
+                    // Which headings to grab inside of the contentSelector element. 生成目录的级别
+                    headingSelector: 'h1, h2, h3',
+                });
+                //鼠标移入微信图标后出现二维码
+                $('.wechat').popup({
+                    popup: $('.wechat-qr.popup'),
+                    position:'left center',
+                });
+                $('.toc.button').popup({
+                    popup: $('.toc-container.popup'),
+                    on:'click',
+                    position:'left center',
+                });
+                //生成二维码的js代码  test 为二维码承载元素的id
+                var qrcode = new QRCode("qrcode", {
+                    text: "http://jindo.dev.naver.com/collie",
+                    width: 110,
+                    height: 110,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+                //平滑滚动插件  失败
+                /*$('#toTop-button').click(function(){
+                    $(window).scrollTo(0,500);
+                });*/
+
+            </script>
+</body>
+</html>
