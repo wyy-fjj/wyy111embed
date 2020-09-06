@@ -12,8 +12,8 @@ public interface UserMapper {
     void adduser(User user);
     @Select("select * from user where username=#{username}")
     User finduserbyname(String username );
-    @Select("select * from user where username=#{username} and password=#{password}")
-    User checkuser(String username, String password );
+    @Select("select * from user where username=#{username} and password=#{password} and userphone=#{userphone}")
+    User checkuser(String username, String password ,String userphone);
     @Update("update user set token=#{token} where username=#{username}")
     void updateUser(User user);
 

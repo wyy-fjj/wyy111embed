@@ -37,16 +37,18 @@ public class logincontroller {
                             Map<String,Object> map){
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String userphone = request.getParameter("userphone");
+        //String userphone = request.getParameter("userphone");
         HttpSession session = request.getSession();
 
-        User user= userMapper.checkuser(username,password);
+        User user= userMapper.checkuser(username,password,userphone);
         if(user!=null){
             String token = UUID.randomUUID().toString();
             user.setToken(token);
             userMapper.updateUser(user);
             response.addCookie(new Cookie("token",token));
             session.setAttribute("loginUser",user);
-            map.put("msg0","欢迎"+username);
+            map.put("msg2","欢迎"+username);
             map.put("user",user);
             //model.addAttribute("user",username);
 

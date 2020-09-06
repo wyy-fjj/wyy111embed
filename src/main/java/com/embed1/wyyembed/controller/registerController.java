@@ -36,11 +36,11 @@ public class registerController {
         user.setUserphone(userphone);
         User user1=userMapper.finduserbyname(username);
         if(user1!=null){
-            map.put("msg","该用户名已被注册，请重新注册");
+            map.put("msg1","该用户名已被注册，请重新注册");
             return "/register";
         }else{
             userMapper.adduser(user);
-            map.put("msg","注册成功，请登录");
+            map.put("msg1","注册成功，请登录");
             return "/login";
         }
 
